@@ -26,5 +26,15 @@ async function connectToMongo() {
     }
   }
 
+  async function addTeam(teamName) {
+    try {
+      const collection = await connectToMongo(); // S'assurer que la collection est récupérée après connexion
+      const result = await collection.insertOne({ name: teamName }); // Insertion de la nouvelle équipe
+      return result.insertedId; // Retourner l'ID de l'équipe ajoutée
+    } catch (error) {
+      console.error('Erreur lors de l\'ajout de l\'équipe:', error);
+      throw error;
+    }
+  }
 
-module.exports = { connectToMongo, getAllTeams }
+module.exports = { connectToMongo, getAllTeams, addTeam }
