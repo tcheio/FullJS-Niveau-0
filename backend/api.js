@@ -1,5 +1,5 @@
 const express = require('express');
-const { connectToMongo, getAllTeams, addTeam, deleteTeam } = require('./mongoDbConnect');  
+const { connectToMongo, getAllTeams, addTeam, deleteTeam, ObjectId } = require('./mongoDbConnect');  
 const app = express();
 const port = 4000;
 
@@ -29,6 +29,28 @@ app.post('/add-team', async (req, res) => {
     res.status(500).json({ message: 'Erreur lors de l\'ajout de l\'équipe' });
   }
 });
+
+app.delete('/delete-team/:id', async (req, res) => {
+  const { id } = req.params;
+  
+  if (!ObjectId.isValid(id)) {
+    return res.status(400).json({ message: 'ID invalide' });
+  }
+
+  try {
+    const success = await deleteTeam(id);
+    if (success) {
+      res.json({ message: 'Équipe supprimée avec succès' });
+    } else {
+      res.status(404).json({ message: 'Équipe non trouvée' });
+    }
+  } catch (error) {
+    console.error('Erreur lors de la suppression de l\'équipe:', error);
+    res.status(500).json({ message: 'Erreur lors de la suppression de l\'équipe' });
+  }
+});
+
+
 
 app.listen(port, () => {
   console.log(`Serveur démarré sur le port ${port}`);

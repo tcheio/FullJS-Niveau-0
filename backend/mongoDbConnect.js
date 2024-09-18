@@ -1,4 +1,4 @@
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId  } = require('mongodb');
 const uri = "mongodb://localhost:27017";
 const dbName = "tournament-team-manager";
 const collectionName = "team";
@@ -28,13 +28,31 @@ async function connectToMongo() {
 
   async function addTeam(teamName) {
     try {
-      const collection = await connectToMongo(); // S'assurer que la collection est récupérée après connexion
-      const result = await collection.insertOne({ name: teamName }); // Insertion de la nouvelle équipe
-      return result.insertedId; // Retourner l'ID de l'équipe ajoutée
+      const collection = await connectToMongo();
+      const result = await collection.insertOne({ name: teamName });
+      return result.insertedId;
     } catch (error) {
       console.error('Erreur lors de l\'ajout de l\'équipe:', error);
       throw error;
     }
   }
 
-module.exports = { connectToMongo, getAllTeams, addTeam }
+  async function deleteTeam(teamId) {
+    try {
+      const collection = await connectToMongo(); 
+      const result = await collection.deleteOne({ _id: new ObjectId(teamId) });
+      if (result.deletedCount === 1) {
+        console.log('Équipe supprimée avec succès');
+        return true; 
+      } else {
+        console.log('Aucune équipe trouvée avec cet ID');
+        return false;
+      }
+    } catch (error) {
+      console.error('Erreur lors de la suppression de l\'équipe:', error);
+      throw error;
+    }
+  }
+
+
+module.exports = { connectToMongo, getAllTeams, addTeam, deleteTeam, ObjectId}
