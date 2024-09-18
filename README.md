@@ -1,7 +1,3 @@
-Bien sûr, voici la version bien formatée du fichier `README.md`. J'ai corrigé la mise en forme et ajouté des sections pour clarifier l'installation et les instructions.
-
----
-
 ```markdown
 # Gestion d'Équipe de Tournois
 
@@ -139,5 +135,3 @@ Ce projet est sous la licence MIT - voir le fichier [LICENSE](LICENSE) pour plus
 ```
 
 ---
-
-Tu peux copier ce contenu dans un fichier nommé `README.md` à la racine de ton projet. Assure-toi de remplacer les liens de dépôt et autres informations spécifiques si nécessaire.
