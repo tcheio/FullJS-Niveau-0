@@ -1,4 +1,5 @@
-```markdown
+---
+
 # Gestion d'Équipe de Tournois
 
 Ce projet est une application de gestion d'équipes pour des tournois. Il comprend une API backend construite avec Express et MongoDB, ainsi qu'un front-end développé avec Vue.js.
@@ -132,6 +133,5 @@ Les tests couvrent les opérations de connexion, ajout, récupération, et suppr
 ## License
 
 Ce projet est sous la licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de détails.
-```
 
 ---
